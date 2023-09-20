@@ -13,15 +13,18 @@ app.get("/", (req, res) => {
 });
 
 // READ all users
-app.get("/users", (request, response) => {
+app.get("/users", async (request, response) => {
     const query = "SELECT * FROM users ORDER BY name;"; // sql query to select all from the table users
-    dbConnection.query(query, (error, results, fields) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const [results] = await dbConnection.execute(query);
+    response.json(results);
+});
+
+app.get("/users/:id", async (request, response) => {
+    const id = request.params.id;
+    const query = "SELECT * FROM users WHERE id = ?;"; // sql query to select all from the table users
+    const values = [id];
+    const [results] = await dbConnection.execute(query, values);
+    response.json(results);
 });
 
 app.listen(port, () => {

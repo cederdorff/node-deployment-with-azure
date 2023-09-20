@@ -1,4 +1,4 @@
-import mysql from "mysql2"; // Import the mysql2 library
+import mysql from "mysql2/promise"; // Import the mysql2 library
 import "dotenv/config"; // Load environment variables
 import fs from "fs/promises"; // Import the file system promises module
 
@@ -19,7 +19,7 @@ if (process.env.MYSQL_CERT) {
 }
 
 // Create a connection to the database
-const dbConnection = mysql.createConnection(dbConfig);
+const dbConnection = await mysql.createConnection(dbConfig);
 
 // Export the database connection
 export default dbConnection;
