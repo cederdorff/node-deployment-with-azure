@@ -9,7 +9,7 @@ app.use(express.json()); // to parse JSON bodies
 app.use(cors());
 
 app.get("/", (req, res) => {
-    res.send("Node Express REST Users API from deployment branch 🎉");
+    res.send("Node Express REST Users API from RACEBASE🎉");
 });
 
 // READ all users
